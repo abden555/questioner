@@ -173,6 +173,45 @@ function AddValueToDB() {
  
 }
  
+function ExportDBValues() {
+ 
+ if (!window.openDatabase) {
+  alert('Databases are not supported in this browser.');
+  return false;
+ } else {
+	alert('Openied');
+ }
+ 
+// this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
+// content and not just keep repeating lines
+ $('#lbUsers').html('');
+ 
+// this next section will select all the content from the User table and then go through it row by row
+// appending the UserId  FirstName  LastName to the  #lbUsers element on the page
+ db.transaction(function(transaction) {
+   transaction.executeSql('SELECT * FROM User;', [],
+     function(transaction, result) {
+      if (result != null && result.rows != null) {
+        for (var i = 0; i < result.rows.length; i++) {
+			 var row = result.rows.item(i);
+			$.ajax({
+				url: 'http://pixeledges.com/test.php',
+				type: "POST",
+				data:{'UserID':row.UserId,'FirstName':row.FirstName,'LastName':row.LastName},
+				success: function(data) {
+					alert(data);	
+				}
+				
+			});
+         
+        }
+      }
+     },errorHandler);
+ },errorHandler,nullHandler);
+ 
+ return;
+ 
+} 
 </script>
 </head>
 <body onload="onBodyLoad()">
@@ -181,6 +220,7 @@ function AddValueToDB() {
 <input id="txLastName" type="text" placeholder="Last Name">
 <input type="button" value="Add record" onClick="AddValueToDB()">
 <input type="button" value="Refresh" onClick="ListDBValues()"> <br>
+<input type="button" value="Export" onClick="ExportDBValues()"> <br>
 <br>
 <span style="font-weight:bold;">Currently stored values:</span>
 <span id="lbUsers"></span>
