@@ -12,7 +12,7 @@ function errorHandler(transaction, error) {
 }
 // this is called when a successful transaction happens
 function successCallBack() {
-   alert("DEBUGGING: success");
+   //alert("DEBUGGING: success");
  
 }
 function nullHandler(){};
@@ -21,13 +21,13 @@ function onBodyLoad(){
  
 // This alert is used to make sure the application is loaded correctly
 // you can comment this out once you have the application working
-alert("DEBUGGING: we are in the onBodyLoad() function");
+//alert("DEBUGGING: we are in the onBodyLoad() function");
  
  if (!window.openDatabase) {
    // not all mobile devices support databases  if it does not, the following alert will display
    // indicating the device will not be albe to run this application
    alert('Databases are not supported in this browser.');
-   return;
+   return false;
  }
  
 // this line tries to open the database base locally on the device
@@ -56,7 +56,7 @@ function ListDBValues() {
   alert('Databases are not supported in this browser.');
   return false;
  } else {
-	alert('Openied');
+	//alert('Openied');
  }
  
 // this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
@@ -71,9 +71,18 @@ function ListDBValues() {
       if (result != null && result.rows != null) {
         for (var i = 0; i < result.rows.length; i++) {
           var row = result.rows.item(i);
-          $('#lbUsers').append('<br>' + row.question1 + '. ' +
-row.question2+ ' ' + row.question3 + ' ' + row.question4);
+          //$('#lbUsers').append('<br>' + row.question1 + '. ' + row.question2+ ' ' + row.question3 + ' ' + row.question4);
+		  
         }
+		$('#Name').val('');
+		$('#Name').val('');
+		$('#Mobile').val('');
+		$('#Age').val('');
+		$('#Email').val('');
+		$('#Nationality').val('');
+		$("input:radio").attr("checked", false);
+		$("#lbUsers").addClass('alert alert-success perauto100 roundcorner');
+		$("#lbUsers").html('Successfully added the questioner');
       }
      },errorHandler);
  },errorHandler,nullHandler);
@@ -89,19 +98,20 @@ function AddValueToDB() {
    alert('Databases are not supported in this browser.');
    return false;
  } else {
-	alert('Database is opened');	 
- }
- alert($('#Name').val());
-// this is the section that actually inserts the values into the User table
- db.transaction(function(transaction) { transaction.executeSql('INSERT INTO questions(Name, Mobile, Age, Email, Nationality, question1, question2, question3, question4) VALUES (?,?,?,?,?,?,?,?,?)',[$('#Name').val(),$('#Mobile').val(),$('#Age').val(),$('#Email').val(),$('#Nationality').val(),$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), $('input[name=question3]:checked').val(), $('input[name=question4]:checked').val()],
+	var errText = '' 
+	
+   // this is the section that actually inserts the values into the User table
+   
+   db.transaction(function(transaction) { transaction.executeSql('INSERT INTO questions(Name, Mobile, Age, Email, Nationality, question1, question2, question3, question4) VALUES (?,?,?,?,?,?,?,?,?)',[$('#Name').val(),$('#Mobile').val(),$('#Age').val(),$('#Email').val(),$('#Nationality').val(),$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), $('input[name=question3]:checked').val(), $('input[name=question4]:checked').val()],
      nullHandler,errorHandler);
    });
  
-// this calls the function that will show what is in the User table in the database
- ListDBValues();
+	// this calls the function that will show what is in the User table in the database
+ 	ListDBValues();
  
- return false;
- 
+ 	return false;
+   
+ }
 }
  
 function ExportDBValues() {
@@ -110,7 +120,7 @@ function ExportDBValues() {
   alert('Databases are not supported in this browser.');
   return false;
  } else {
-	alert('Openied');
+	//alert('Openied');
  }
  
 // this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
@@ -130,7 +140,7 @@ function ExportDBValues() {
 				type: "POST",
 				data:{'Name':row.Name,'Mobile':row.Mobile,'Age':row.Age,'Email':row.Email,'Nationality':row.Nationality,'question1':row.question1,'question1':row.question1,'question3':row.question3,'question4':row.question4},
 				success: function(data) {
-					alert(data);	
+					//alert(data);	
 				}
 				
 			});
