@@ -103,12 +103,11 @@ alert("DEBUGGING: we are in the onBodyLoad() function");
 // if it does not exist, it will create it and return a database object stored in variable db
  db = openDatabase(shortName, version, displayName,maxSize);
  
-// this line will try to create the table User in the database just
-created/openned
+// this line will try to create the table User in the database just created/openned
  db.transaction(function(tx){
  
   // you can uncomment this next line if you want the User table to be empty each time the application runs
-  // tx.executeSql( 'DROP TABLE User',nullHandler,nullHandler);
+  tx.executeSql( 'DROP TABLE User',nullHandler,nullHandler);
  
   // this line actually creates the table User if it does not exist and sets up the three columns and their types
   // note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
