@@ -1,215 +1,145 @@
-//  Declare SQL Query for SQLite
+// global variables
+var db;
+var shortName = 'WebSqlDB';
+var version = '1.0';
+var displayName = 'WebSqlDB';
+var maxSize = 65535;
  
-var createStatement = "CREATE TABLE IF NOT EXISTS Contacts (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, useremail TEXT)";
+// this is called when an error happens in a transaction
+function errorHandler(transaction, error) {
+   alert('Error: ' + error.message + ' code: ' + error.code);
  
-var selectAllStatement = "SELECT * FROM Contacts";
+}
+// this is called when a successful transaction happens
+function successCallBack() {
+   alert("DEBUGGING: success");
  
-var insertStatement = "INSERT INTO Contacts (username, useremail) VALUES (?, ?)";
+}
+function nullHandler(){};
+// called when the application loads
+function onBodyLoad(){
  
-var updateStatement = "UPDATE Contacts SET username = ?, useremail = ? WHERE id=?";
+// This alert is used to make sure the application is loaded correctly
+// you can comment this out once you have the application working
+alert("DEBUGGING: we are in the onBodyLoad() function");
  
-var deleteStatement = "DELETE FROM Contacts WHERE id=?";
+ if (!window.openDatabase) {
+   // not all mobile devices support databases  if it does not, the following alert will display
+   // indicating the device will not be albe to run this application
+   alert('Databases are not supported in this browser.');
+   return;
+ }
  
-var dropStatement = "DROP TABLE Contacts";
+// this line tries to open the database base locally on the device
+// if it does not exist, it will create it and return a database object stored in variable db
+ db = openDatabase(shortName, version, displayName,maxSize);
  
- var db = openDatabase("AddressBook", "1.0", "Address Book", 200000);  // Open SQLite Database
+// this line will try to create the table User in the database just created/openned
+ db.transaction(function(tx){
  
-var dataset;
+  // you can uncomment this next line if you want the User table to be empty each time the application runs
+  tx.executeSql( 'DROP TABLE User',nullHandler,nullHandler);
  
-var DataType;
+  // this line actually creates the table User if it does not exist and sets up the three columns and their types
+  // note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
+  // easily from the table.
+   tx.executeSql( 'CREATE TABLE IF NOT EXISTS Questoins(ID INTEGER NOT NULL PRIMARY KEY, question1 TEXT NOT NULL, question2 INTEGER, question3 INTEGER, question4 INTEGER)',
+[],nullHandler,errorHandler);
+ },errorHandler,successCallBack);
  
- function initDatabase()  // Function Call When Page is ready.
+}
  
-{
+// list the values in the database to the screen using jquery to update the #lbUsers element
+function ListDBValues() {
  
-    try {
+ if (!window.openDatabase) {
+  alert('Databases are not supported in this browser.');
+  return false;
+ } else {
+	alert('Openied');
+ }
  
-        if (!window.openDatabase)  // Check browser is supported SQLite or not.
+// this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
+// content and not just keep repeating lines
+ $('#lbUsers').html('');
  
-        {
- 
-            alert('Databases are not supported in this browser.');
- 
+// this next section will select all the content from the User table and then go through it row by row
+// appending the UserId  FirstName  LastName to the  #lbUsers element on the page
+ db.transaction(function(transaction) {
+   transaction.executeSql('SELECT * FROM Questoins;', [],
+     function(transaction, result) {
+      if (result != null && result.rows != null) {
+        for (var i = 0; i < result.rows.length; i++) {
+          var row = result.rows.item(i);
+          $('#lbUsers').append('<br>' + row.question1 + '. ' +
+row.question2+ ' ' + row.question3 + ' ' + row.question4);
         }
+      }
+     },errorHandler);
+ },errorHandler,nullHandler);
  
-        else {
+ return;
  
-            createTable();  // If supported then call Function for create table in SQLite
+}
  
+// this is the function that puts values into the database using the values from the text boxes on the screen
+function AddValueToDB() {
+ 
+ if (!window.openDatabase) {
+   alert('Databases are not supported in this browser.');
+   return false;
+ } else {
+	alert('Database is opened');	 
+ }
+ 
+// this is the section that actually inserts the values into the User table
+ db.transaction(function(transaction) { transaction.executeSql('INSERT INTO Questoins(question1, question2, question3, question4) VALUES (?,?)',[$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), $('input[name=question3]:checked').val(), $('input[name=question4]:checked').val()],
+     nullHandler,errorHandler);
+   });
+ 
+// this calls the function that will show what is in the User table in the database
+ ListDBValues();
+ 
+ return false;
+ 
+}
+ 
+function ExportDBValues() {
+ 
+ if (!window.openDatabase) {
+  alert('Databases are not supported in this browser.');
+  return false;
+ } else {
+	alert('Openied');
+ }
+ 
+// this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
+// content and not just keep repeating lines
+ $('#lbUsers').html('');
+ 
+// this next section will select all the content from the User table and then go through it row by row
+// appending the UserId  FirstName  LastName to the  #lbUsers element on the page
+ db.transaction(function(transaction) {
+   transaction.executeSql('SELECT * FROM User;', [],
+     function(transaction, result) {
+      if (result != null && result.rows != null) {
+        for (var i = 0; i < result.rows.length; i++) {
+			 var row = result.rows.item(i);
+			$.ajax({
+				url: 'http://pixeledges.com/test.php',
+				type: "POST",
+				data:{'question1':row.question1,'question1':row.question1,'question3':row.question3,'question4':row.question4},
+				success: function(data) {
+					alert(data);	
+				}
+				
+			});
+         
         }
+      }
+     },errorHandler);
+ },errorHandler,nullHandler);
  
-    }
+ return;
  
-    catch (e) {
- 
-        if (e == 2) {
- 
-            // Version number mismatch. 
- 
-            console.log("Invalid database version.");
- 
-        } else {
- 
-            console.log("Unknown error " + e + ".");
- 
-        }
- 
-        return;
- 
-    }
- 
-}
- 
-function createTable()  // Function for Create Table in SQLite.
- 
-{
- 
-    db.transaction(function (tx) { tx.executeSql(createStatement, [], showRecords, onError); });
- 
-}
- 
-function insertRecord() // Get value from Input and insert record . Function Call when Save/Submit Button Click..
- 
-{
- 
-        var usernametemp = $('input:text[id=username]').val();
- 
-        var useremailtemp = $('input:text[id=useremail]').val();
-        db.transaction(function (tx) { tx.executeSql(insertStatement, [usernametemp, useremailtemp], loadAndReset, onError); });
- 
-        //tx.executeSql(SQL Query Statement,[ Parameters ] , Sucess Result Handler Function, Error Result Handler Function );
- 
-}
- 
-function deleteRecord(id) // Get id of record . Function Call when Delete Button Click..
- 
-{
- 
-    var iddelete = id.toString();
- 
-    db.transaction(function (tx) { tx.executeSql(deleteStatement, [id], showRecords, onError); alert("Delete Sucessfully"); });
- 
-    resetForm();
- 
-}
- 
-function updateRecord() // Get id of record . Function Call when Delete Button Click..
- 
-{
- 
-    var usernameupdate = $('input:text[id=username]').val().toString();
- 
-    var useremailupdate = $('input:text[id=useremail]').val().toString();
- 
-    var useridupdate = $("#id").val();
- 
-    db.transaction(function (tx) { tx.executeSql(updateStatement, [usernameupdate, useremailupdate, Number(useridupdate)], loadAndReset, onError); });
- 
-}
- 
-function dropTable() // Function Call when Drop Button Click.. Talbe will be dropped from database.
- 
-{
- 
-    db.transaction(function (tx) { tx.executeSql(dropStatement, [], showRecords, onError); });
- 
-    resetForm();
- 
-    initDatabase();
- 
-}
- 
-function loadRecord(i) // Function for display records which are retrived from database.
- 
-{
- 
-    var item = dataset.item(i);
- 
-    $("#username").val((item['username']).toString());
- 
-    $("#useremail").val((item['useremail']).toString());
- 
-    $("#id").val((item['id']).toString());
- 
-}
- 
-function resetForm() // Function for reset form input values.
- 
-{
- 
-    $("#username").val("");
- 
-    $("#useremail").val("");
- 
-    $("#id").val("");
- 
-}
- 
-function loadAndReset() //Function for Load and Reset...
- 
-{
- 
-    resetForm();
- 
-    showRecords()
- 
-}
- 
-function onError(tx, error) // Function for Hendeling Error...
- 
-{
- 
-    alert(error.message);
- 
-}
- 
-function showRecords() // Function For Retrive data from Database Display records as list
- 
-{
- 
-    $("#results").html('')
- 
-    db.transaction(function (tx) {
- 
-        tx.executeSql(selectAllStatement, [], function (tx, result) {
- 
-            dataset = result.rows;
- 
-            for (var i = 0, item = null; i < dataset.length; i++) {
- 
-                item = dataset.item(i);
- 
-                var linkeditdelete = '<li>' + item['username'] + ' , ' + item['useremail'] + '    ' + '<a href="#" onclick="loadRecord(' + i + ');">edit</a>' + '    ' +
- 
-                                            '<a href="#" onclick="deleteRecord(' + item['id'] + ');">delete</a></li>';
- 
-                $("#results").append(linkeditdelete);
- 
-            }
- 
-        });
- 
-    });
- 
-}
- 
-$(document).ready(function () // Call function when page is ready for load..
- 
-{
-;
- 
-    $("body").fadeIn(2000); // Fede In Effect when Page Load..
- 
-    initDatabase();
- 
-    $("#submitButton").click(insertRecord);  // Register Event Listener when button click.
- 
-    $("#btnUpdate").click(updateRecord);
- 
-    $("#btnReset").click(resetForm);
- 
-    $("#btnDrop").click(dropTable);
- 
-});
- 
-  
+} 
