@@ -7,7 +7,7 @@ if (!$con)
 
 mysql_select_db("pixeledg_dgh", $con);
 
-if(mysql_query("INSERT INTO questioner (FirstName,LastName) VALUES ('".$_POST['FirstName']."','".$_POST['LastName']."')")) {
+if(mysql_query("INSERT INTO questioner (Name,Mobile,Age,Email,Nationality,question1,question2,question3,question4) VALUES ('".$_POST['Name']."','".$_POST['Mobile']."','".$_POST['Age']."','".$_POST['Email']."','".$_POST['Nationality']."','".$_POST['question1']."','".$_POST['question2']."','".$_POST['question3']."','".$_POST['question4']."')")) {
 	echo "DONE";	
 } else {
 	echo "NOT DONE";	

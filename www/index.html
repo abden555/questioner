@@ -68,39 +68,56 @@ application
         	<h1 class="text-center">
             	QUESTIONER FORM
             </h1>
+            
+            <div class="text-center">Name</div>
+            <div class="text-center"><input type="text" name="Name" id="Name" value="" placeholder="Please Enter Name"></div>
+            <div class="sep10px">&nbsp;</div>
+            <div class="text-center">Mobile</div>
+            <div class="text-center"><input type="text" name="Mobile" id="Mobile" value="" placeholder="Please Enter Mobile"></div>
+            <div class="sep10px">&nbsp;</div>
+            <div class="text-center">Age</div>
+            <div class="text-center"><input type="text" name="Age" id="Age" value="" placeholder="Please Enter Age"></div>
+            <div class="sep10px">&nbsp;</div>
+            <div class="text-center">Email</div>
+            <div class="text-center"><input type="text" name="Email" id="Email" value="" placeholder="Please Enter Email"></div>
+            <div class="sep10px">&nbsp;</div>
+            <div class="text-center">Nationality</div>
+            <div class="text-center"><input type="text" name="Nationality" id="Nationality" value="" placeholder="Please Enter Your Name"></div>
+            <div class="sep10px">&nbsp;</div>
+            
         	<h4>What do you think about Frutea?</h4>
-            <ul>
-            	<li><input type="radio" name="question1" value="Dislike extremely">&nbsp;Dislike extremely</li>
-                <li><input type="radio" name="question1" value="Dislike somewhat">&nbsp;Dislike somewhat</li>
-                <li><input type="radio" name="question1" value="Neither like nor dislike">&nbsp;Neither like nor dislike</li>
-                <li><input type="radio" name="question1" value="Like somewhat">&nbsp;Like somewhat</li>
-                <li><input type="radio" name="question1" value="Like extremely">&nbsp;Like extremely</li>
+            
+            	<input type="radio" name="question1" value="one">&nbsp;Dislike extremely
+                <input type="radio" name="question1" value="two">&nbsp;Dislike somewhat
+                <input type="radio" name="question1" value="three">&nbsp;Neither like nor dislike
+                <input type="radio" name="question1" value="four">&nbsp;Like somewhat
+                <input type="radio" name="question1" value="five">&nbsp;Like extremely
             </ul>
 			<div class="sep10px">&nbsp;</div>
             <h4>If Frutea is sold in bottles and cups everywhere you buy your regular drinks, what price would you be willing to pay for Frutea:</h4>
-            <ul>
-            	<li><input type="radio" name="question2" value="1">&nbsp;Slightly less than my regular drinks</li>
-                <li><input type="radio" name="question2" value="2">&nbsp;Same price as my regular drinks</li>
-                <li><input type="radio" name="question2" value="3">&nbsp;Slightly more than my regular drinks</li>
-                <li><input type="radio" name="question2" value="4">&nbsp;A lot more than my regular drinks</li>
+            
+            	<input type="radio" name="question2" value="one">&nbsp;Slightly less than my regular drinks
+                <input type="radio" name="question2" value="two">&nbsp;Same price as my regular drinks
+                <input type="radio" name="question2" value="three">&nbsp;Slightly more than my regular drinks
+                <input type="radio" name="question2" value="four">&nbsp;A lot more than my regular drinks
             </ul>
 			<div class="sep10px">&nbsp;</div>
             <h4>If you start buying Frutea in bottles and cups where you buy your regular drinks, what would you replace from your regular purchases (choose all drinks that you’ll replace):</h4>
-            <ul>
-            	<li><input type="radio" name="question3" value="1">&nbsp;Carbonated Soft Drinks</li>
-                <li><input type="radio" name="question3" value="2">&nbsp;Water</li>
-                <li><input type="radio" name="question3" value="3">&nbsp;Juices</li>
-                <li><input type="radio" name="question3" value="4">&nbsp;Energy/ Sports Drinks</li>
-                <li><input type="radio" name="question3" value="5">&nbsp;Ice Tea drinks</li>
-                <li><input type="radio" name="question3" value="6">&nbsp;Hot Tea drinks</li>
-                <li><input type="radio" name="question3" value="7">&nbsp;Other drinks</li>
-                <li><input type="radio" name="question3" value="8">&nbsp;Wouldn’t replace any drink, just buy Frutea in addition</li>
+            
+            	<input type="radio" name="question3" value="one">&nbsp;Carbonated Soft Drinks
+                <input type="radio" name="question3" value="two">&nbsp;Water
+                <input type="radio" name="question3" value="three">&nbsp;Juices
+                <input type="radio" name="question3" value="four">&nbsp;Energy/ Sports Drinks
+                <input type="radio" name="question3" value="five">&nbsp;Ice Tea drinks
+                <input type="radio" name="question3" value="six">&nbsp;Hot Tea drinks
+                <input type="radio" name="question3" value="seven">&nbsp;Other drinks
+                <input type="radio" name="question3" value="eight">&nbsp;Wouldn’t replace any drink, just buy Frutea in addition
             </ul>
 			<div class="sep10px">&nbsp;</div>
             <h4>Would you like to join the Frutea Fan-group and be contacted for more feedback and exclusive offers?</h4>
-            <ul>
-            	<li><input type="radio" name="question4" value="Yes">&nbsp;Yes</li>
-                <li><input type="radio" name="question4" value="No">&nbsp;No</li>
+            
+            	<input type="radio" name="question4" value="Yes">&nbsp;Yes
+                <input type="radio" name="question4" value="No">&nbsp;No
             </ul>
             <div class="sep20px">&nbsp;</div>
             <input type="button" value="Add record" onClick="AddValueToDB()">

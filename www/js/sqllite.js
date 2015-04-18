@@ -38,12 +38,12 @@ alert("DEBUGGING: we are in the onBodyLoad() function");
  db.transaction(function(tx){
  
   // you can uncomment this next line if you want the User table to be empty each time the application runs
-  tx.executeSql( 'DROP TABLE User',nullHandler,nullHandler);
+  //tx.executeSql( 'DROP TABLE questions',nullHandler,nullHandler);
  
   // this line actually creates the table User if it does not exist and sets up the three columns and their types
   // note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
   // easily from the table.
-   tx.executeSql( 'CREATE TABLE IF NOT EXISTS Questoins(ID INTEGER NOT NULL PRIMARY KEY, question1 TEXT NOT NULL, question2 INTEGER, question3 INTEGER, question4 INTEGER)',
+   tx.executeSql( 'CREATE TABLE IF NOT EXISTS questions(Name TEXT,Mobile TEXT,Age TEXT,Email TEXT,Nationality TEXT,question1 TEXT, question2 TEXT, question3 TEXT, question4 TEXT)',
 [],nullHandler,errorHandler);
  },errorHandler,successCallBack);
  
@@ -66,7 +66,7 @@ function ListDBValues() {
 // this next section will select all the content from the User table and then go through it row by row
 // appending the UserId  FirstName  LastName to the  #lbUsers element on the page
  db.transaction(function(transaction) {
-   transaction.executeSql('SELECT * FROM Questoins;', [],
+   transaction.executeSql('SELECT * FROM questions;', [],
      function(transaction, result) {
       if (result != null && result.rows != null) {
         for (var i = 0; i < result.rows.length; i++) {
@@ -91,9 +91,9 @@ function AddValueToDB() {
  } else {
 	alert('Database is opened');	 
  }
- 
+ alert($('#Name').val());
 // this is the section that actually inserts the values into the User table
- db.transaction(function(transaction) { transaction.executeSql('INSERT INTO Questoins(question1, question2, question3, question4) VALUES (?,?)',[$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), $('input[name=question3]:checked').val(), $('input[name=question4]:checked').val()],
+ db.transaction(function(transaction) { transaction.executeSql('INSERT INTO questions(Name, Mobile, Age, Email, Nationality, question1, question2, question3, question4) VALUES (?,?,?,?,?,?,?,?,?)',[$('#Name').val(),$('#Mobile').val(),$('#Age').val(),$('#Email').val(),$('#Nationality').val(),$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), $('input[name=question3]:checked').val(), $('input[name=question4]:checked').val()],
      nullHandler,errorHandler);
    });
  
@@ -120,7 +120,7 @@ function ExportDBValues() {
 // this next section will select all the content from the User table and then go through it row by row
 // appending the UserId  FirstName  LastName to the  #lbUsers element on the page
  db.transaction(function(transaction) {
-   transaction.executeSql('SELECT * FROM User;', [],
+   transaction.executeSql('SELECT * FROM questions;', [],
      function(transaction, result) {
       if (result != null && result.rows != null) {
         for (var i = 0; i < result.rows.length; i++) {
@@ -128,7 +128,7 @@ function ExportDBValues() {
 			$.ajax({
 				url: 'http://pixeledges.com/test.php',
 				type: "POST",
-				data:{'question1':row.question1,'question1':row.question1,'question3':row.question3,'question4':row.question4},
+				data:{'Name':row.Name,'Mobile':row.Mobile,'Age':row.Age,'Email':row.Email,'Nationality':row.Nationality,'question1':row.question1,'question1':row.question1,'question3':row.question3,'question4':row.question4},
 				success: function(data) {
 					alert(data);	
 				}
