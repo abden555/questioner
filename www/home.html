@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC>
+<html>
+<head>
+ 
+<!-- Change this if you want to allow scaling -->
+<meta name="viewport" content="width=default-width; user-scalable=no" />
+<meta http-equiv="Content-type" content="text/html;charset=utf-8">
+<title>Questioner</title>
+<link rel="stylesheet" href="css/bootstrap.css" media="screen">
+<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="css/bootstrap-select.min.css">
+
+
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/sqllite.js"></script>
+</head>
+<body onload="onBodyLoad()">
+<div class="container">
+	<div class="row">
+    	<div class="col-sm-12 col-xs-12 col-md-12">
+        	<div class="text-center">
+            	<img src="img/logo.jpg" class="img-responsive">
+            </div>
+            
+        	<h1 class="text-center">
+            	QUESTIONER FORM
+            </h1>
+            <div class="sep15px">&nbsp;</div>
+            <div id="lbUsers" style="width:100%"></div>
+            <div class="sep15px">&nbsp;</div>
+            <div class="text-left h4">Name</div>
+            <div class="text-center"><input type="text" name="Name" id="Name" value="" placeholder="Please Enter Name" class="frm"></div>
+            <div class="sep10px">&nbsp;</div>
+            <div class="text-left h4">Mobile</div>
+            <div class="text-center"><input type="text" name="Mobile" id="Mobile" value="" placeholder="Please Enter Mobile" class="frm"></div>
+            <div class="sep10px">&nbsp;</div>
+            <div class="text-left h4">Age</div>
+            <div class="text-center"><input type="text" name="Age" id="Age" value="" placeholder="Please Enter Age" class="frm"></div>
+            <div class="sep10px">&nbsp;</div>
+            <div class="text-left h4">Email</div>
+            <div class="text-center"><input type="text" name="Email" id="Email" value="" placeholder="Please Enter Email" class="frm"></div>
+            <div class="sep10px">&nbsp;</div>
+            <div class="text-left h4">Nationality</div>
+            <div class="text-center"><input type="text" name="Nationality" id="Nationality" value="" placeholder="Please Enter Nationality" class="frm"></div>
+            <div class="sep10px">&nbsp;</div>
+            
+        	<h4>What do you think about Frutea?</h4>
+            <div class="in-review-cart h5">
+            	<input type="radio" name="question1" value="one" id="question1_1"><label for="question1_1" class=""><span></span></label>&nbsp;Dislike extremely<br>
+                <input type="radio" name="question1" value="two" id="question1_2"><label for="question1_2" class=""><span></span></label>&nbsp;Dislike somewhat<br>
+                <input type="radio" name="question1" value="three" id="question1_3"><label for="question1_3" class=""><span></span></label>&nbsp;Neither like nor dislike<br>
+                <input type="radio" name="question1" value="four" id="question1_4"><label for="question1_4" class=""><span></span></label>&nbsp;Like somewhat<br>
+                <input type="radio" name="question1" value="five" id="question1_5"><label for="question1_5" class=""><span></span></label>&nbsp;Like extremely<br>
+            </div>   
+            
+			<div class="sep10px">&nbsp;</div>
+            <h4> If Frutea is sold in bottles and cups everywhere, what price would you be willing to pay for Frutea as compare to your regular drink?</h4>
+            <div class="in-review-cart h5">
+            	<input type="radio" name="question2" value="one" id="question2_1"><label for="question2_1" class=""><span></span></label>&nbsp;Slightly less than my regular drinks<br>
+                <input type="radio" name="question2" value="two" id="question2_2"><label for="question2_2" class=""><span></span></label>&nbsp;Same price as my regular drinks<br>
+                <input type="radio" name="question2" value="three" id="question2_3"><label for="question2_3" class=""><span></span></label>&nbsp;Slightly more than my regular drinks<br>
+                <input type="radio" name="question2" value="four" id="question2_4"><label for="question2_4" class=""><span></span></label>&nbsp;A lot more than my regular drinks<br>
+           </div>
+			<div class="sep10px">&nbsp;</div>
+            <h4>If you start buying Frutea in bottles or cups, what would Frutea replace from your regular drinks you presently buy? (may choose multiple answers)</h4>
+            <div class="in-review-cart h5">
+            	<input type="radio" name="question3" value="one" id="question3_1"><label for="question3_1" class=""><span></span></label>&nbsp;Carbonated Soft Drinks<br>
+                <input type="radio" name="question3" value="two" id="question3_2"><label for="question3_2" class=""><span></span></label>&nbsp;Water<br>
+                <input type="radio" name="question3" value="three" id="question3_3"><label for="question3_3" class=""><span></span></label>&nbsp;Juices<br>
+                <input type="radio" name="question3" value="four" id="question3_4"><label for="question3_4" class=""><span></span></label>&nbsp;Energy/ Sports Drinks<br>
+                <input type="radio" name="question3" value="five" id="question3_5"><label for="question3_5" class=""><span></span></label>&nbsp;Ice Tea drinks<br>
+                <input type="radio" name="question3" value="six" id="question3_6"><label for="question3_6" class=""><span></span></label>&nbsp;Hot Tea drinks<br>
+                <input type="radio" name="question3" value="seven" id="question3_7"><label for="question3_7" class=""><span></span></label>&nbsp;Other drinks<br>
+                <input type="radio" name="question3" value="eight" id="question3_8"><label for="question3_8" class=""><span></span></label>&nbsp;Wouldn't replace any drink, just buy Frutea in addition<br>
+           </div>
+			<div class="sep10px">&nbsp;</div>
+            <h4>Would you like to join the Frutea Fan-group and be contacted for more feedback and exclusive offers?</h4>
+            <div class="in-review-cart h5">
+            	<input type="radio" name="question4" value="Yes" id="question4_1"><label for="question4_1" class=""><span></span></label>&nbsp;Yes<br>
+                <input type="radio" name="question4" value="No" id="question4_2"><label for="question4_1" class=""><span></span></label>&nbsp;No<br>
+           </div>
+            <div class="sep20px">&nbsp;</div>
+            <input type="button" class="btn btn-lg btn-customdefault" value="Add record" onClick="AddValueToDB()">
+        </div>
+        <div class="sep25px">&nbsp;</div>
+        <div class="footerBtm">
+            <a href="export.html" class="btn btn-lg btn-customorangelight text-black perauto80"><span class="text-black">&nbsp;Export Data</span></a>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html> 
