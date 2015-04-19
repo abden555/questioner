@@ -130,6 +130,20 @@ a:active,a:link,a:hover,a:visited { text-decoration:none !important; }
      background:url(../img/green_radio_small.png) -25px bottom;
 	 font-size:16px !important;
 }
+
+.in-review-cart input[type="checkbox"] + label span {
+    display:inline-block;
+    width:25px;
+    height:20px;
+    background:url(../img/green_radio_small.png) 0px top no-repeat;
+    cursor:pointer;
+	font-size:16px;
+}
+
+.in-review-cart input[type="checkbox"]:checked + label span {
+     background:url(../img/green_radio_small.png) -25px bottom;
+	 font-size:16px !important;
+}
 .footerBtm { background:#f4F4F4; padding:10px; }
 .h5 { font-size:16px; }
 @media only screen and (min-width : 240px) and (max-width : 320px) {

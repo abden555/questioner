@@ -100,10 +100,14 @@ function AddValueToDB() {
    return false;
  } else {
 	var errText = '' 
+	var checkboxVal = $("input[name=question3]:checked").map(function () {
+			return this.value;
+		}).get().join(",")
+	//alert(checkboxVal);
 	
    // this is the section that actually inserts the values into the User table
    
-   db.transaction(function(transaction) { transaction.executeSql('INSERT INTO questions(Name, Mobile, Age, Email, Nationality, question1, question2, question3, question4) VALUES (?,?,?,?,?,?,?,?,?)',[$('#Name').val(),$('#Mobile').val(),$('#Age').val(),$('#Email').val(),$('#Nationality').val(),$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), $('input[name=question3]:checked').val(), $('input[name=question4]:checked').val()],
+   db.transaction(function(transaction) { transaction.executeSql('INSERT INTO questions(Name, Mobile, Age, Email, Nationality, question1, question2, question3, question4) VALUES (?,?,?,?,?,?,?,?,?)',[$('#Name').val(),$('#Mobile').val(),$('#Age').val(),$('#Email').val(),$('#Nationality').val(),$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), checkboxVal, $('input[name=question4]:checked').val()],
      nullHandler,errorHandler);
    });
  
