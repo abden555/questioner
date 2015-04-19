@@ -115,6 +115,7 @@ a:active,a:link,a:hover,a:visited { text-decoration:none !important; }
     vertical-align:middle;
     background:url(../img/green_radio_small.png) top 20px;
     cursor:pointer;
+	
 }
 .in-review-cart input[type="radio"] + label span {
     display:inline-block;
@@ -122,10 +123,12 @@ a:active,a:link,a:hover,a:visited { text-decoration:none !important; }
     height:20px;
     background:url(../img/green_radio_small.png) 0px top no-repeat;
     cursor:pointer;
+	font-size:16px;
 }
 
 .in-review-cart input[type="radio"]:checked + label span {
      background:url(../img/green_radio_small.png) -25px bottom;
+	 font-size:16px !important;
 }
 .footerBtm { background:#f4F4F4; padding:10px; }
 .h5 { font-size:16px; }
