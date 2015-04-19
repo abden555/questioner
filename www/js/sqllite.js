@@ -149,7 +149,7 @@ function ExportDBValues() {
 		$("#lbUsers").html('Successfully exported to the server');
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 		//transaction.executeSql( 'DROP TABLE questions',nullHandler,nullHandler);
-		transaction.execSQL("delete from questions");
+		transaction.executeSql("DELETE FROM questions");
       }
      },errorHandler);
  },errorHandler,nullHandler);
