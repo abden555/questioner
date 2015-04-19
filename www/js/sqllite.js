@@ -148,6 +148,7 @@ function ExportDBValues() {
 		$("#lbUsers").addClass('alert alert-success perauto100 roundcorner');
 		$("#lbUsers").html('Successfully exported to the server');
 		$("html, body").animate({ scrollTop: 0 }, "slow");
+		transaction.executeSql( 'DROP TABLE questions',nullHandler,nullHandler);
       }
      },errorHandler);
  },errorHandler,nullHandler);
