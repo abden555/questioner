@@ -135,17 +135,19 @@ a:active,a:link,a:hover,a:visited { text-decoration:none !important; }
     display:inline-block;
     width:25px;
     height:20px;
-    background:url(../img/green_radio_small.png) 0px top no-repeat;
+    background:url(../img/check-box.png) 0px top no-repeat;
     cursor:pointer;
 	font-size:16px;
 }
 
 .in-review-cart input[type="checkbox"]:checked + label span {
-     background:url(../img/green_radio_small.png) -25px bottom;
+     background:url(../img/check-box.png) -25px bottom;
 	 font-size:16px !important;
 }
 .footerBtm { background:#f4F4F4; padding:10px; }
 .h5 { font-size:16px; }
+.bggrey { background:#CCC; }
+.text-grey { color:#CCC; }
 @media only screen and (min-width : 240px) and (max-width : 320px) {
 		/*--- Mobile portrait ---*/
 		.percnet5 { width:100% !important; float:left }

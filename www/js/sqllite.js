@@ -43,7 +43,7 @@ function onBodyLoad(){
   // this line actually creates the table User if it does not exist and sets up the three columns and their types
   // note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
   // easily from the table.
-   tx.executeSql( 'CREATE TABLE IF NOT EXISTS questions(Name TEXT,Mobile TEXT,Age TEXT,Email TEXT,Nationality TEXT,question1 TEXT, question2 TEXT, question3 TEXT, question4 TEXT)',
+   tx.executeSql( 'CREATE TABLE IF NOT EXISTS questions(promoterID TEXT,Name TEXT,Mobile TEXT,Age TEXT,Email TEXT,Nationality TEXT,question1 TEXT, question2 TEXT, question3 TEXT, question4 TEXT)',
 [],nullHandler,errorHandler);
  },errorHandler,successCallBack);
  
@@ -107,7 +107,7 @@ function AddValueToDB() {
 	
    // this is the section that actually inserts the values into the User table
    
-   db.transaction(function(transaction) { transaction.executeSql('INSERT INTO questions(Name, Mobile, Age, Email, Nationality, question1, question2, question3, question4) VALUES (?,?,?,?,?,?,?,?,?)',[$('#Name').val(),$('#Mobile').val(),$('#Age').val(),$('#Email').val(),$('#Nationality').val(),$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), checkboxVal, $('input[name=question4]:checked').val()],
+   db.transaction(function(transaction) { transaction.executeSql('INSERT INTO questions(promoterID, Name, Mobile, Age, Email, Nationality, question1, question2, question3, question4) VALUES (?,?,?,?,?,?,?,?,?,?)',[$("#promoterID").val(),$('#Name').val(),$('#Mobile').val(),$('#Age').val(),$('#Email').val(),$('#Nationality').val(),$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), checkboxVal, $('input[name=question4]:checked').val()],
      nullHandler,errorHandler);
    });
  
@@ -143,7 +143,7 @@ function ExportDBValues() {
 			$.ajax({
 				url: 'http://pixeledges.com/test.php',
 				type: "POST",
-				data:{'Name':row.Name,'Mobile':row.Mobile,'Age':row.Age,'Email':row.Email,'Nationality':row.Nationality,'question1':row.question1,'question1':row.question1,'question3':row.question3,'question4':row.question4},
+				data:{'promoterID':row.promoterID,'Name':row.Name,'Mobile':row.Mobile,'Age':row.Age,'Email':row.Email,'Nationality':row.Nationality,'question1':row.question1,'question1':row.question1,'question3':row.question3,'question4':row.question4},
 				success: function(data) {
 					//alert(data);	
 				}
