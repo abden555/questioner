@@ -83,6 +83,7 @@ function ListDBValues() {
 		$("input:radio").attr("checked", false);
 		$("#lbUsers").addClass('alert alert-success perauto100 roundcorner');
 		$("#lbUsers").html('Successfully added the questioner');
+		$("html, body").animate({ scrollTop: 0 }, "slow");
       }
      },errorHandler);
  },errorHandler,nullHandler);
@@ -134,7 +135,7 @@ function ExportDBValues() {
      function(transaction, result) {
       if (result != null && result.rows != null) {
         for (var i = 0; i < result.rows.length; i++) {
-			 var row = result.rows.item(i);
+			var row = result.rows.item(i);
 			$.ajax({
 				url: 'http://pixeledges.com/test.php',
 				type: "POST",
@@ -142,10 +143,11 @@ function ExportDBValues() {
 				success: function(data) {
 					//alert(data);	
 				}
-				
 			});
-         
         }
+		$("#lbUsers").addClass('alert alert-success perauto100 roundcorner');
+		$("#lbUsers").html('Successfully exported to the server');
+		$("html, body").animate({ scrollTop: 0 }, "slow");
       }
      },errorHandler);
  },errorHandler,nullHandler);
