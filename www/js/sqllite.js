@@ -83,7 +83,7 @@ function ListDBValues() {
 		$("input:radio").attr("checked", false);
 		$("input:checkbox").attr("checked", false);
 		$("#lbUsers").addClass('alert alert-success perauto100 roundcorner');
-		$("#lbUsers").html('Successfully added the questioner');
+		$("#lbUsers").html('Successfully added the questionnaire');
 		$("html, body").animate({ scrollTop: 0 }, "slow");
       }
      },errorHandler);
