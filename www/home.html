@@ -16,6 +16,11 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-select.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/sqllite.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.selectpicker').selectpicker();	
+	});
+</script>
 </head>
 <body onload="onBodyLoad()">
 <div class="container">
@@ -28,11 +33,11 @@
             <div class="sep15px">&nbsp;</div>
             <div id="lbUsers" style="width:100%"></div>
             <div class="sep15px">&nbsp;</div>
-            <div class="text-left h4 text-grey">Promoter ID</div>
+            <div class="text-left h4 text-grey">Location</div>
             <div class="sep5px">&nbsp;</div>
             <div class="text-center">
-            	<select name="promoterID" class="frm bggrey" id="promoterID">
-                	<option value="">Select Promoter ID</option>
+            	<select name="promoterID" class="bggrey selectpicker text-left" id="promoterID" data-style="btn-default" data-live-search="false">
+                	<option value="">Select Location</option>
                     <option value="MOE">MOE</option>
                     <option value="DFC">DFC</option>
                     <option value="Greens">Greens</option>
@@ -48,23 +53,19 @@
             <div class="sep10px">&nbsp;</div>
             <div class="text-left h4">Name</div>
             <div class="sep5px">&nbsp;</div>
-            <div class="text-center"><input type="text" name="Name" id="Name" value="" placeholder="Please Enter Name" class="frm"></div>
-            <div class="sep10px">&nbsp;</div>
-            <div class="text-left h4">Mobile</div>
-            <div class="sep5px">&nbsp;</div>
-            <div class="text-center"><input type="text" name="Mobile" id="Mobile" value="" placeholder="Please Enter Mobile" class="frm"></div>
+            <div class="text-center"><input type="text" name="Name" id="Name" value="" placeholder="" class="frm"></div>
             <div class="sep10px">&nbsp;</div>
             <div class="text-left h4">Age</div>
             <div class="sep5px">&nbsp;</div>
-            <div class="text-center"><input type="text" name="Age" id="Age" value="" placeholder="Please Enter Age" class="frm"></div>
+            <div class="text-center"><input type="text" name="Age" id="Age" value="" placeholder="" class="frm"></div>
             <div class="sep10px">&nbsp;</div>
             <div class="text-left h4">Email</div>
             <div class="sep5px">&nbsp;</div>
-            <div class="text-center"><input type="text" name="Email" id="Email" value="" placeholder="Please Enter Email" class="frm"></div>
+            <div class="text-center"><input type="email" name="Email" id="Email" value="" placeholder="" class="frm"></div>
             <div class="sep10px">&nbsp;</div>
             <div class="text-left h4">Nationality</div>
             <div class="sep5px">&nbsp;</div>
-            <div class="text-center"><input type="text" name="Nationality" id="Nationality" value="" placeholder="Please Enter Nationality" class="frm"></div>
+            <div class="text-center"><input type="text" name="Nationality" id="Nationality" value="" placeholder="" class="frm"></div>
             <div class="sep10px">&nbsp;</div>
             
         	<h4>What do you think about Frutea?</h4>
@@ -85,7 +86,7 @@
                 <input type="radio" name="question2" value="four" id="question2_4"><label for="question2_4" class="h5"><span></span>&nbsp;A lot more than my regular drinks</label><br>
            </div>
 			<div class="sep10px">&nbsp;</div>
-            <h4>If you start buying Frutea in bottles and cups where you buy your regular drinks, what would you replace from your regular purchases <br>(choose all drinks that you'll replace)</h4>
+            <h4>If you start buying Frutea in bottles or cups, what would Frutea replace from your regular drinks you presently buy? <br>(may choose multiple answers)</h4>
             <div class="in-review-cart h5">
             	<input type="checkbox" name="question3" value="one" id="question3_1"><label for="question3_1" class="h5"><span></span>&nbsp;Carbonated Soft Drinks</label><br>
                 <input type="checkbox" name="question3" value="two" id="question3_2"><label for="question3_2" class="h5"><span></span>&nbsp;Water</label><br>
@@ -95,6 +96,7 @@
                 <input type="checkbox" name="question3" value="six" id="question3_6"><label for="question3_6" class="h5"><span></span>&nbsp;Hot Tea drinks</label><br>
                 <input type="checkbox" name="question3" value="seven" id="question3_7"><label for="question3_7" class="h5"><span></span>&nbsp;Other drinks</label><br>
                 <input type="checkbox" name="question3" value="eight" id="question3_8"><label for="question3_8" class="h5"><span></span>&nbsp;Wouldn't replace any drink, just buy Frutea in addition</label><br>
+                <input type="checkbox" name="question3" value="eight" id="question3_9"><label for="question3_9" class="h5"><span></span>&nbsp;I wouldn't buy Frutea</label><br>
            </div>
 			<div class="sep10px">&nbsp;</div>
             <h4>Would you like to join the Frutea Fan-group and be contacted for more feedback and exclusive offers?</h4>
@@ -109,7 +111,7 @@
     </div>
 </div>
 <div class="footerBtm">
-    <a href="export.html" class="btn btn-lg btn-customorangelight text-black perauto80"><span class="text-black">&nbsp;Export Data</span></a>
+    <a href="export.html" class="btn btn-lg btn-customorangelight text-black perauto80"><span class="text-black">&nbsp;Done</span></a>
 </div>
 
 </body>
