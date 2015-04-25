@@ -15,15 +15,33 @@
 <script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-select.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.form.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/sqllite.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$('.selectpicker').selectpicker();	
+		$("#form1").validate({
+		   rules: {
+			 promoterID: "required",
+			 Name: "required",
+			 Email: { required: true, email:true }
+			 
+		   },
+		   messages: {
+			 promoterID: "<span class='text text-warning'>&nbsp;This Field is required</span>",
+			 Name: "<span class='text text-white'>&nbsp;This Field is required</span>",
+			 Email: {
+				 required :"<br><span class='text text-white'>&nbsp;This Field is required</span>",
+				email :"<br><span class='text text-white'>&nbsp;Invalid Email</span>"
+			 }
+		   }
+		})
 	});
 </script>
 </head>
 <body onload="onBodyLoad()">
 <div class="container">
+	<form id="form1" name="form1">
 	<div class="row">
     	<div class="col-sm-12 col-xs-12 col-md-12">
         	<div class="text-center">
@@ -35,10 +53,10 @@
             <div class="sep15px">&nbsp;</div>
             <div class="text-left h4 text-grey">Location</div>
             <div class="sep5px">&nbsp;</div>
-            <div class="text-center">
-            	<select name="promoterID" class="bggrey selectpicker text-left" id="promoterID" data-style="btn-default" data-live-search="false">
+            <div class="text-left">
+            	<select name="promoterID" class="bggrey selectpicker text-left" id="promoterID" data-mobile="true" data-style="btn-default" data-live-search="false">
                 	<option value="">Select Location</option>
-                    <option value="MOE">MOE</option>
+                    <option value="MOE">MOE</option>	
                     <option value="DFC">DFC</option>
                     <option value="Greens">Greens</option>
                     <option value="Rashidya">Rashidya</option>
@@ -53,19 +71,19 @@
             <div class="sep10px">&nbsp;</div>
             <div class="text-left h4">Name</div>
             <div class="sep5px">&nbsp;</div>
-            <div class="text-center"><input type="text" name="Name" id="Name" value="" placeholder="" class="frm"></div>
+            <div class="text-left"><input type="text" name="Name" id="Name" value="" placeholder="" class="frm"></div>
             <div class="sep10px">&nbsp;</div>
             <div class="text-left h4">Age</div>
             <div class="sep5px">&nbsp;</div>
-            <div class="text-center"><input type="text" name="Age" id="Age" value="" placeholder="" class="frm"></div>
+            <div class="text-left"><input type="text" name="Age" id="Age" value="" placeholder="" class="frm"></div>
             <div class="sep10px">&nbsp;</div>
             <div class="text-left h4">Email</div>
             <div class="sep5px">&nbsp;</div>
-            <div class="text-center"><input type="email" name="Email" id="Email" value="" placeholder="" class="frm"></div>
+            <div class="text-left"><input type="email" name="Email" id="Email" value="" placeholder="" class="frm"></div>
             <div class="sep10px">&nbsp;</div>
             <div class="text-left h4">Nationality</div>
             <div class="sep5px">&nbsp;</div>
-            <div class="text-center"><input type="text" name="Nationality" id="Nationality" value="" placeholder="" class="frm"></div>
+            <div class="text-left"><input type="text" name="Nationality" id="Nationality" value="" placeholder="" class="frm"></div>
             <div class="sep10px">&nbsp;</div>
             
         	<h4>What do you think about Frutea?</h4>
@@ -105,10 +123,11 @@
                 <input type="radio" name="question4" value="No" id="question4_2"><label for="question4_2" class="h5"><span></span>&nbsp;No</label><br>
            </div>
             <div class="sep20px">&nbsp;</div>
-            <input type="button" class="btn btn-lg btn-customdefault perauto80" value="SUBMIT" onClick="AddValueToDB()">
+            <input type="button" class="btn btn-lg btn-customdefault perauto80" value="SUBMIT" onClick="return AddValueToDB()">
         </div>
         <div class="sep25px">&nbsp;</div>
     </div>
+    </form>
 </div>
 <div class="footerBtm">
     <a href="export.html" class="btn btn-lg btn-customorangelight text-black perauto80"><span class="text-black">&nbsp;Done&nbsp;</span></a>

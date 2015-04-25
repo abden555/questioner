@@ -81,6 +81,7 @@ function ListDBValues() {
 		$('#Email').val('');
 		$('#Nationality').val('');
 		$("input:radio").attr("checked", false);
+		$("input:checkbox").attr("checked", false);
 		$("#lbUsers").addClass('alert alert-success perauto100 roundcorner');
 		$("#lbUsers").html('Successfully added the questioner');
 		$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -88,7 +89,7 @@ function ListDBValues() {
      },errorHandler);
  },errorHandler,nullHandler);
  
- return;
+ return false;
  
 }
  
@@ -99,24 +100,28 @@ function AddValueToDB() {
    alert('Databases are not supported in this browser.');
    return false;
  } else {
-	var errText = '' 
-	var checkboxVal = $("input[name=question3]:checked").map(function () {
-			return this.value;
-		}).get().join(",")
-	//alert(checkboxVal);
-	
-   // this is the section that actually inserts the values into the User table
-   
-   db.transaction(function(transaction) { transaction.executeSql('INSERT INTO questions(promoterID, Name, Mobile, Age, Email, Nationality, question1, question2, question3, question4) VALUES (?,?,?,?,?,?,?,?,?,?)',[$("#promoterID").val(),$('#Name').val(),$('#Mobile').val(),$('#Age').val(),$('#Email').val(),$('#Nationality').val(),$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), checkboxVal, $('input[name=question4]:checked').val()],
-     nullHandler,errorHandler);
-   });
- 
-	// this calls the function that will show what is in the User table in the database
- 	ListDBValues();
- 
- 	return false;
-   
+	if($("#form1").valid()) {
+		var errText = '' 
+		var checkboxVal = $("input[name=question3]:checked").map(function () {
+				return this.value;
+			}).get().join(",")
+		//alert(checkboxVal);
+		
+	   // this is the section that actually inserts the values into the User table
+	   
+	   db.transaction(function(transaction) { transaction.executeSql('INSERT INTO questions(promoterID, Name, Mobile, Age, Email, Nationality, question1, question2, question3, question4) VALUES (?,?,?,?,?,?,?,?,?,?)',[$("#promoterID").val(),$('#Name').val(),$('#Mobile').val(),$('#Age').val(),$('#Email').val(),$('#Nationality').val(),$('input[name=question1]:checked').val(), $('input[name=question2]:checked').val(), checkboxVal, $('input[name=question4]:checked').val()],
+		 nullHandler,errorHandler);
+	   });
+	 
+		// this calls the function that will show what is in the User table in the database
+		ListDBValues();
+	 
+		return false;
+	} else {
+		$("html, body").animate({ scrollTop: 0 }, "slow");	
+	}
  }
+ return false;
 }
  
 function ExportDBValues() {
@@ -138,22 +143,27 @@ function ExportDBValues() {
    transaction.executeSql('SELECT * FROM questions;', [],
      function(transaction, result) {
       if (result != null && result.rows != null) {
+		var rescheck = '';
         for (var i = 0; i < result.rows.length; i++) {
 			var row = result.rows.item(i);
 			$.ajax({
 				url: 'http://pixeledges.com/test.php',
 				type: "POST",
-				data:{'promoterID':row.promoterID,'Name':row.Name,'Mobile':row.Mobile,'Age':row.Age,'Email':row.Email,'Nationality':row.Nationality,'question1':row.question1,'question1':row.question1,'question3':row.question3,'question4':row.question4},
+				data:{'promoterID':row.promoterID,'Name':row.Name,'Mobile':row.Mobile,'Age':row.Age,'Email':row.Email,'Nationality':row.Nationality,'question1':row.question1,'question2':row.question2,'question3':row.question3,'question4':row.question4},
 				success: function(data) {
 					//alert(data);	
+					rescheck = 1;
 				}
 			});
         }
-		$("#lbUsers").addClass('alert alert-success perauto100 roundcorner');
-		$("#lbUsers").html('Successfully exported to the server');
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-		//transaction.executeSql( 'DROP TABLE questions',nullHandler,nullHandler);
-		transaction.executeSql("DELETE FROM questions");
+		//alert(rescheck)
+		if(rescheck==1) {
+			$("#lbUsers").addClass('alert alert-success perauto100 roundcorner');
+			$("#lbUsers").html('Successfully exported to the server');
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			//transaction.executeSql( 'DROP TABLE questions',nullHandler,nullHandler);
+			transaction.executeSql("DELETE FROM questions");
+		}
       }
      },errorHandler);
  },errorHandler,nullHandler);
