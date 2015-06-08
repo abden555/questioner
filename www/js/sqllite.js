@@ -146,7 +146,7 @@ function ExportDBValues() {
 		var rescheck = '';
         for (var i = 0; i < result.rows.length; i++) {
 			var row = result.rows.item(i);
-			alert(row.promoterID);
+			//alert(row.promoterID);
 			$.ajax({
 				url: 'http://pixeledges.com/test.php',
 				type: "POST",
